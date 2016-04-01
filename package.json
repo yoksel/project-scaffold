@@ -17,6 +17,7 @@
   },
   "scripts": {
     "test": "editorconfig-tools check *",
+    "fix": "editorconfig-tools fix *",
     "start": "gulp serve"
   }
 }
