@@ -24,15 +24,15 @@ gulp.task('sass', function() {
           'last 2 Opera versions',
           'last 2 Edge versions'
           ]}),
-        mqpacker(),
-        //cssnano(),
+        mqpacker()
     ];
 
-  console.log('⬤  Run ' + colors.green('Sass') +
+  console.log('⬤  Run ' + colors.yellow('Sass') +
               ' + ' +
-              colors.yellow('Autoprefixer') +
+              colors.green('Autoprefixer') +
               ' + ' +
-              colors.cyan('Cssnano'));
+              colors.cyan('Cssnano') + ' ⬤'
+              );
 
   return sass('src/scss/styles.scss')
     .pipe(postcss(processors))
@@ -45,7 +45,7 @@ gulp.task('sass', function() {
 
 // IMAGES
 gulp.task('images', function () {
-  console.log(colors.magenta('⬤  Optimize images...'));
+  console.log(colors.magenta('⬤  Optimize images... ⬤'));
 
   return gulp.src('src/img/*')
     .pipe(imagemin({
@@ -58,7 +58,7 @@ gulp.task('images', function () {
 
 // INCLUDE BLOCKS IN HTML
 gulp.task('include', function() {
-  console.log(colors.magenta('⬤  Include files to HTML...'));
+  console.log(colors.blue('⬤  Include files to HTML... ⬤'));
 
   gulp.src('src/index.html')
     .pipe(include())
@@ -82,7 +82,7 @@ gulp.task('serve', ['sass'], function() {
 
 // COPY
 gulp.task('copy', function() {
-  console.log(colors.blue('⬤  Copy files to build/...'));
+  console.log(colors.magenta('⬤  Copy files to build/... ⬤'));
 
   return gulp.src(['assets/**/*', '*.html'])
     .pipe(copy('build/'));
@@ -90,13 +90,8 @@ gulp.task('copy', function() {
 
 // PUBLISH TO GITHUB PAGES
 gulp.task('ghPages', function() {
-  console.log(colors.rainbow('⬤  Publish to GithubPages...'));
+  console.log(colors.rainbow('⬤  Publish to Github Pages... ⬤'));
+
   return gulp.src('build/**/*')
     .pipe(ghPages());
 });
-
-// BUILD
-gulp.task('build', ['sass', 'include', 'copy']);
-
-// DEPLOY
-gulp.task('deploy', ['sass', 'include', 'copy', 'ghPages']);

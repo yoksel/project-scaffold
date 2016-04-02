@@ -24,10 +24,10 @@
   },
   "scripts": {
     "start": "gulp serve",
-    "build": "gulp build",
-    "deploy": "gulp deploy",
     "img": "gulp images",
-    "test": "editorconfig-tools check *",
+    "build": "gulp sass && gulp include && gulp copy",
+    "deploy": "npm run build && gulp ghPages",
+    "check": "editorconfig-tools check *",
     "fix": "editorconfig-tools fix *"
   }
 }
