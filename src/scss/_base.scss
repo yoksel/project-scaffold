@@ -25,3 +25,36 @@ UL {
 H1, H2, H3, H4, H5 {
   font-weight: normal;
 }
+
+/* LAYOUT */
+
+.header,
+.container,
+.footer {
+  @include container-width;
+  margin: 1rem auto;
+  padding: .5rem;
+  border: 1px solid #DDD;
+}
+
+.container {
+  display: flex;
+
+  @media ( max-width: $bp-tablet ) {
+    flex-direction: column;
+  }
+}
+
+.main {
+  flex-grow: 1;
+}
+.aside {
+  flex-basis: 200px;
+  margin-left: 30px;
+
+  @media ( max-width: $bp-tablet ) {
+    flex-basis: 0;
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+}
