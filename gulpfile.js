@@ -13,6 +13,7 @@ var pngquant = require('imagemin-pngquant');
 var copy = require('gulp-copy');
 var ghPages = require('gulp-gh-pages');
 var colors = require('colors/safe');
+var del = require('del');
 
 // SASS, AUTOPREFIXR, MINIMIZE
 gulp.task('sass', function() {
@@ -80,9 +81,16 @@ gulp.task('serve', ['sass'], function() {
   gulp.watch(['assets/**/*.js'], {cwd: '.'}, reload);
 });
 
-// COPY
-gulp.task('copy', function() {
-  console.log(colors.magenta('⬤  Copy files to build/... ⬤'));
+// CLEAN BUILD
+gulp.task('clean', function(){
+  del(['build/*']).then(paths => {
+    console.log('⬤  Deleted files and folders:\n', paths.join('\n'));
+  });
+});
+
+// CLEAN BUILD & COPY FILES TO IT
+gulp.task('copy', ['clean'], function() {
+  console.log(colors.magenta('⬤  Clear build/ and copy files to it... ⬤'));
 
   return gulp.src(['assets/**/*', '*.html'])
     .pipe(copy('build/'));
