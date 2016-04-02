@@ -1,5 +1,7 @@
 # Project scaffold
 
+My simple scaffold for small projects
+
 ## Usage
 
 **&#9733; Run & watch**
