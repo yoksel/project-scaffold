@@ -1,7 +1,41 @@
-BODY {
-    background: ivory;
+/* Variables, mixins */
+
+$bp-mobile: 320px;
+$bp-tablet: 768px;
+$bp-desktop: 1200px;
+
+$color-lightgray: #f2f2f2;
+
+@mixin container-width {
+  max-width: $bp-mobile;
+
+  @media (min-width: $bp-tablet ) {
+    max-width: $bp-tablet;
+  }
+
+  @media (min-width: $bp-desktop ) {
+    max-width: $bp-desktop;
+  }
 }
 
-a {
-  display: flex;
+@mixin clear {
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+BODY {
+    background: #FFF;
+}
+
+.header,
+.footer,
+.main {
+  @include container-width;
+  margin: 1rem auto;
+  padding: .5rem;
+  border: 1px solid #DDD;
 }
