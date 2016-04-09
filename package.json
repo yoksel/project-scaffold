@@ -25,7 +25,9 @@
     "gulp-postcss": "^6.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-ruby-sass": "^2.0.6",
-    "imagemin-pngquant": "^4.2.2"
+    "imagemin-pngquant": "^4.2.2",
+    "posthtml": "^0.8.5",
+    "posthtml-classes": "^0.2.1"
   },
   "scripts": {
     "start": "gulp serve",

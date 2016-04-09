@@ -14,6 +14,20 @@ var copy = require('gulp-copy');
 var ghPages = require('gulp-gh-pages');
 var colors = require('colors/safe');
 var del = require('del');
+var posthtml = require('gulp-posthtml');
+
+gulp.task('test', function () {
+    return gulp.src('test.html')
+        .pipe(posthtml([
+            require('posthtml-classes')({
+                fileSave: true,
+                filePath: './classList.css',
+                overwrite: false,
+                eol: '\n',
+                nested: false
+            })
+        ]));
+});
 
 // SASS, AUTOPREFIXR, MINIMIZE
 gulp.task('sass', function() {
