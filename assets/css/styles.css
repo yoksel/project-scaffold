@@ -414,6 +414,7 @@ H1, H2, H3, H4, H5 {
 
 .footer {
   max-width: 320px;
+  display: flex;
   margin: 1rem auto;
   padding: .5rem;
   background: beige;
