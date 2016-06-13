@@ -44,6 +44,13 @@ gulp.task('sass', function() {
     .pipe(gulp.dest('assets/css'));
 });
 
+// JS
+gulp.task('js', function () {
+  return gulp.src('src/js/**.*')
+  .pipe(gulp.dest('assets/js'))
+  .pipe(reload({ stream:true }));
+});
+
 // IMAGES
 gulp.task('images', function () {
   console.log(colors.magenta('⬤  Optimize images... ⬤'));
@@ -78,7 +85,7 @@ gulp.task('serve', ['sass'], function() {
 
   gulp.watch(['src/**/*.scss'], ['sass']);
   gulp.watch(['src/**/*.html'], ['include']);
-  gulp.watch(['assets/**/*.js'], {cwd: '.'}, reload);
+  gulp.watch(['src/**/*.js'], ['js']);
 });
 
 // CLEAN BUILD
