@@ -412,6 +412,10 @@ H1, H2, H3, H4, H5 {
   background: khaki;
   border: 1px solid rgba(0, 0, 0, 0.1); }
 
+.nav__item {
+  display: inline-block;
+  margin: 0 .5rem; }
+
 .footer {
   max-width: 320px;
   display: flex;
@@ -423,7 +427,12 @@ H1, H2, H3, H4, H5 {
 .footer__items {
   display: flex;
   justify-content: space-between;
-  align-items: center; }
+  align-items: center;
+  width: 100%; }
+
+.socials__item {
+  display: inline-block;
+  margin: 0 .5rem; }
 
 @media (min-width: 768px) {
   .header,
