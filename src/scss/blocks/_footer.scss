@@ -6,9 +6,9 @@
   margin: 1rem auto;
   padding: .5rem;
 
-
   background: beige;
   border: 1px solid rgba(0,0,0,.1);
+
 }
 
   .footer__items {
@@ -16,7 +16,17 @@
     justify-content: space-between;
     align-items: center;
 
+    width: 100%;
+
     @media ( max-width: $bp-tablet ) {
       flex-direction: column;
     }
   }
+
+  .socials {
+
+  }
+    .socials__item {
+      display: inline-block;
+      margin: 0 .5rem;
+    }
