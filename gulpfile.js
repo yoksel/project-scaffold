@@ -46,8 +46,8 @@ gulp.task('sass', function() {
 
 // JS
 gulp.task('js', function () {
-  return gulp.src('src/js/**.*')
-  .pipe(gulp.dest('assets/js'))
+  return gulp.src('src/js/**/*.js')
+  .pipe(gulp.dest('assets/js/'))
   .pipe(reload({ stream:true }));
 });
 
