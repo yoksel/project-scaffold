@@ -1,6 +1,6 @@
 # Project scaffold
 
-My simple scaffold for small projects.   
+My simple scaffold for small projects.
 Curently project under construction.
 
 ## Usage
