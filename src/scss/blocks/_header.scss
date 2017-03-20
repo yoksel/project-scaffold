@@ -1,6 +1,4 @@
 .header {
-  @include container-width;
-
   margin: 1rem auto;
   padding: .5rem;
 
@@ -17,9 +15,8 @@
 }
 
 .nav {
-
+  &__item {
+    display: inline-block;
+    margin: 0 .5rem;
+  }
 }
-  .nav__item {
-        display: inline-block;
-        margin: 0 .5rem;
-      }

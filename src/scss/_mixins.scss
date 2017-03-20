@@ -1,9 +1,8 @@
 @mixin container-width {
-  max-width: $bp-mobile;
-
-  @media (min-width: $bp-tablet ) {
-    max-width: $bp-tablet;
-  }
+  min-width: 280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
 
   @media (min-width: $bp-desktop ) {
     max-width: $bp-desktop;

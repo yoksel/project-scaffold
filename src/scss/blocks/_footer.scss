@@ -1,6 +1,4 @@
 .footer {
-  @include container-width;
-
   display: flex;
 
   margin: 1rem auto;
@@ -8,7 +6,6 @@
 
   background: beige;
   border: 1px solid rgba(0,0,0,.1);
-
 }
 
   .footer__items {
