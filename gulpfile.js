@@ -96,7 +96,7 @@ gulp.task('clean', function(){
 });
 
 // CLEAN BUILD & COPY FILES TO IT
-gulp.task('copy', ['clean'], function() {
+gulp.task('copy', function() {
   console.log(colors.magenta('⬤  Clear build/ and copy files to it... ⬤'));
 
   return gulp.src(['assets/**/*', '*.html'])
