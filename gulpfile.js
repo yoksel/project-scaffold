@@ -1,8 +1,8 @@
 var gulp = require('gulp');
-var sass = require('gulp-ruby-sass');
-var browserSync = require('browser-sync');
-var reload = browserSync.reload;
+let sync = require('browser-sync').create();
+var reload = sync.reload;
 var include = require("gulp-include");
+var sass = require('gulp-sass');
 var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
 var cssnano = require('cssnano');
@@ -15,18 +15,20 @@ var ghPages = require('gulp-gh-pages');
 var colors = require('colors/safe');
 var del = require('del');
 
+sass.compiler = require('node-sass');
+
 // SASS, AUTOPREFIXR, MINIMIZE
 gulp.task('sass', function() {
   var processors = [
-        autoprefixer({browsers: [
-          'last 1 version',
-          'last 2 Chrome versions',
-          'last 2 Firefox versions',
-          'last 2 Opera versions',
-          'last 2 Edge versions'
-          ]}),
-        mqpacker()
-    ];
+    autoprefixer({browsers: [
+      'last 1 version',
+      'last 2 Chrome versions',
+      'last 2 Firefox versions',
+      'last 2 Opera versions',
+      'last 2 Edge versions'
+      ]}),
+    mqpacker()
+  ];
 
   console.log('⬤  Run ' + colors.yellow('Sass') +
               ' + ' +
@@ -35,10 +37,11 @@ gulp.task('sass', function() {
               colors.cyan('Cssnano') + ' ⬤'
               );
 
-  return sass('src/scss/styles.scss')
+  return gulp.src('src/scss/styles.scss')
+    .pipe(sass().on('error', sass.logError))
     .pipe(postcss(processors))
-    .pipe(gulp.dest('assets/css'))
-    .pipe(reload({ stream:true }))
+    .pipe(gulp.dest('./assets/css'))
+    .pipe(sync.stream())
     .pipe(postcss([cssnano()]))
     .pipe(rename('styles.min.css'))
     .pipe(gulp.dest('assets/css'));
@@ -76,16 +79,19 @@ gulp.task('include', function() {
 });
 
 // WATCH SASS, PREPROCESS AND RELOAD
-gulp.task('serve', ['sass'], function() {
-  browserSync({
+gulp.task('serve', function() {
+  sync.init({
+    ui: false,
+    notify: false,
+    port: 3000,
     server: {
       baseDir: '.'
     }
   });
 
-  gulp.watch(['src/**/*.scss'], ['sass']);
-  gulp.watch(['src/**/*.html'], ['include']);
-  gulp.watch(['src/**/*.js'], ['js']);
+  gulp.watch(['src/**/*.scss'], gulp.series('sass'));
+  gulp.watch(['src/**/*.html'], gulp.series('include'));
+  gulp.watch(['src/**/*.js'], gulp.series('js'));
 });
 
 // CLEAN BUILD
