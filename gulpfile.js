@@ -79,7 +79,7 @@ gulp.task('include', function() {
 });
 
 // WATCH SASS, PREPROCESS AND RELOAD
-gulp.task('serve', function() {
+gulp.task('serve', gulp.series('sass', function() {
   sync.init({
     ui: false,
     notify: false,
@@ -92,7 +92,7 @@ gulp.task('serve', function() {
   gulp.watch(['src/**/*.scss'], gulp.series('sass'));
   gulp.watch(['src/**/*.html'], gulp.series('include'));
   gulp.watch(['src/**/*.js'], gulp.series('js'));
-});
+}));
 
 // CLEAN BUILD
 gulp.task('clean', function(){
