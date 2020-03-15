@@ -11,7 +11,6 @@ var mqpacker = require("css-mqpacker");
 var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
 var copy = require('gulp-copy');
-var ghPages = require('gulp-gh-pages');
 var colors = require('colors/safe');
 var del = require('del');
 
@@ -71,7 +70,7 @@ gulp.task('images', function () {
 gulp.task('include', function() {
   console.log(colors.blue('⬤  Include files to HTML... ⬤'));
 
-  gulp.src('src/index.html')
+  return gulp.src('src/index.html')
     .pipe(include())
       .on('error', console.log)
     .pipe(gulp.dest('.'))
@@ -79,7 +78,7 @@ gulp.task('include', function() {
 });
 
 // WATCH SASS, PREPROCESS AND RELOAD
-gulp.task('serve', gulp.series('sass', function() {
+gulp.task('serve', gulp.series(['include', 'sass', 'js', 'images'], function() {
   sync.init({
     ui: false,
     notify: false,
@@ -89,6 +88,7 @@ gulp.task('serve', gulp.series('sass', function() {
     }
   });
 
+  gulp.watch(['src/img/*'], gulp.series('images'));
   gulp.watch(['src/**/*.scss'], gulp.series('sass'));
   gulp.watch(['src/**/*.html'], gulp.series('include'));
   gulp.watch(['src/**/*.js'], gulp.series('js'));
@@ -96,7 +96,8 @@ gulp.task('serve', gulp.series('sass', function() {
 
 // CLEAN BUILD
 gulp.task('clean', function(){
-  del(['build/*']).then(paths => {
+  return del(['build/*'])
+  .then(paths => {
     console.log('⬤  Deleted files and folders:\n', paths.join('\n'));
   });
 });
@@ -107,14 +108,6 @@ gulp.task('copy', function() {
 
   return gulp.src(['assets/**/*', '*.html'])
     .pipe(copy('build/'));
-});
-
-// PUBLISH TO GITHUB PAGES
-gulp.task('ghPages', function() {
-  console.log(colors.rainbow('⬤  Publish to Github Pages... ⬤'));
-
-  return gulp.src('build/**/*')
-    .pipe(ghPages());
 });
 
 gulp.task('default', function() {
