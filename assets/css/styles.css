@@ -383,6 +383,9 @@ UL {
 H1, H2, H3, H4, H5 {
   font-weight: normal; }
 
+P:first-child {
+  margin-top: 0; }
+
 /* LAYOUT */
 .wrapper {
   min-width: 280px;
