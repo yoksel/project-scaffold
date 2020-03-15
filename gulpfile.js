@@ -78,14 +78,15 @@ gulp.task('include', function() {
 });
 
 // WATCH SASS, PREPROCESS AND RELOAD
-gulp.task('serve', gulp.series(['include', 'sass', 'js', 'images'], function() {
-  sync.init({
-    ui: false,
-    notify: false,
-    port: 3000,
-    server: {
-      baseDir: '.'
-    }
+gulp.task('serve', gulp.series(['include', 'sass', 'js', 'images'],
+  function() {
+    sync.init({
+      ui: false,
+      notify: false,
+      port: 3000,
+      server: {
+        baseDir: '.'
+      }
   });
 
   gulp.watch(['src/img/*'], gulp.series('images'));
