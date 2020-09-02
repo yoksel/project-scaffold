@@ -43,7 +43,8 @@ gulp.task('sass', function() {
     .pipe(sync.stream())
     .pipe(postcss([cssnano()]))
     .pipe(rename('styles.min.css'))
-    .pipe(gulp.dest('assets/css'));
+    .pipe(gulp.dest('assets/css'))
+    .pipe(reload({ stream: true }));
 });
 
 // JS
